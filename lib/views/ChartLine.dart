@@ -1,10 +1,11 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import '../firebase/Conection.dart';
-class Chartline extends StatelessWidget {
-  Chartline();
+class Chartline extends StatefulWidget {
+  // Chartline();
   @override
-  Widget build(BuildContext context) {
+  _ChartLineState createState()=> _ChartLineState();
+/*  Widget build(BuildContext context) {
     return Expanded(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
@@ -37,7 +38,7 @@ class Chartline extends StatelessWidget {
         )
       )
     );
-  }
+  }*/
 
   /// Create one series with sample hard coded data.
   static List<charts.Series<SensorValues, double>> _createSampleData() {
@@ -45,8 +46,6 @@ class Chartline extends StatelessWidget {
     var myFakeMobileData;
     cxn.getData().then((onValue){
       print('Get valores');
-      print(onValue.length);
-      myFakeMobileData = onValue;
     });
     myFakeMobileData = [
       new SensorValues(0, 15, 2),
@@ -68,6 +67,18 @@ class Chartline extends StatelessWidget {
   }
 }
 
+
+class _ChartLineState extends State<Chartline> {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Hola mundo',
+      textAlign: TextAlign.center,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(fontWeight: FontWeight.bold),
+    );
+  }
+}
 /// Sample linear data type.
 class LinearSales {
   final int year;
