@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Sys Alert'),
+      home: MyHomePage(title: 'Sistema de alerta'),
     );
   }
 }

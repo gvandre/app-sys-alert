@@ -42,21 +42,27 @@ class Chartline extends StatelessWidget {
   /// Create one series with sample hard coded data.
   static List<charts.Series<SensorValues, double>> _createSampleData() {
     Conection cxn = new Conection();
-    var sensorValues = cxn.getData();
-    var myFakeMobileData = [
-      new LinearSales(0, 15),
-      new LinearSales(1, 75),
-      new LinearSales(2, 300),
-      new LinearSales(3, 225),
+    var myFakeMobileData;
+    cxn.getData().then((onValue){
+      print('Get valores');
+      print(onValue.length);
+      myFakeMobileData = onValue;
+    });
+    myFakeMobileData = [
+      new SensorValues(0, 15, 2),
+      new SensorValues(1, 75, 3),
+      new SensorValues(2, 100, 5),
+      new SensorValues(3, 125, 8),
     ];
 
+    print('Mostrar valores');
     return [
       new charts.Series<SensorValues, double>(
         id: 'Mobile',
         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
         domainFn: (SensorValues sv, _) => sv.gas,
         measureFn: (SensorValues sv, _) => sv.temp,
-        data: sensorValues,
+        data: myFakeMobileData,
       ),
     ];
   }

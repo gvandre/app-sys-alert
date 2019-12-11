@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_database/firebase_database.dart';
 
 class Conection {
@@ -8,12 +10,24 @@ class Conection {
     this.databaseReference = FirebaseDatabase.instance.reference();
   }
 
-  List<SensorValues> getData () {
+  Future<List<SensorValues>> getData () async {
     List<SensorValues> list = new List<SensorValues>();
-    databaseReference.child(nodo).once().then((DataSnapshot snapshot) {
+    await databaseReference.child(nodo).once().then((DataSnapshot snapshot) {
       final data = snapshot.value;
-      for (var i = 0; i < data.length; i++) {
-        list.add(new SensorValues(data.value1, data.value2, data.value3));
+      print(data.values);
+      if (data.isNotEmpty) {
+        print('Con datos');
+        data.forEach((k, v) {
+          print(k);
+          list.add(new SensorValues(
+              double.parse(v['temp']),
+              double.parse(v['gas']),
+              double.parse(v['hum'])
+          ));
+        });
+      } else {
+        print('Sin datos');
+        list.add(new SensorValues(0, 0, 0));
       }
     });
     return list;
@@ -24,6 +38,5 @@ class SensorValues {
   final double temp;
   final double gas;
   final double hum;
-
   SensorValues(this.temp, this.gas, this.hum);
 }
