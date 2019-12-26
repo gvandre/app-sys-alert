@@ -14,28 +14,39 @@ class Conection {
     List<SensorValues> list = new List<SensorValues>();
     await databaseReference.child(nodo).once().then((DataSnapshot snapshot) {
       final data = snapshot.value;
+      print(data);
       if (data.isNotEmpty) {
-        print('Con datos');
-        print(data);
-/*        data.forEach((k, v) {
-          print(k);
+        data.forEach((k, v) {
           list.add(new SensorValues(
-              double.parse(v['temp']),
-              double.parse(v['gas']),
-              double.parse(v['hum'])
+            v['temp'],
+            v['gas'],
+            v['hum'],
+            DateTime.parse(v['createdAt'])
           ));
-        });*/
+        });
       } else {
         print('Sin datos');
       }
     });
+    list.sort((a, b) {
+      return a.time.compareTo(b.time);
+    });
+    list.forEach((f) {
+      print(f.time);
+    });
     return list;
   }
+
+  listenAdd(event) {
+    this.databaseReference.child(nodo).limitToLast(1).onChildAdded.listen(event);
+  }
+
 }
 
 class SensorValues {
-  final double temp;
-  final double gas;
-  final double hum;
-  SensorValues(this.temp, this.gas, this.hum);
+  final int temp;
+  final int gas;
+  final int hum;
+  final DateTime time;
+  SensorValues(this.temp, this.gas, this.hum, this.time);
 }
