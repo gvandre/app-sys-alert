@@ -14,7 +14,6 @@ class Conection {
     List<SensorValues> list = new List<SensorValues>();
     await databaseReference.child(nodo).once().then((DataSnapshot snapshot) {
       final data = snapshot.value;
-      print(data);
       if (data.isNotEmpty) {
         data.forEach((k, v) {
           list.add(new SensorValues(
@@ -30,9 +29,6 @@ class Conection {
     });
     list.sort((a, b) {
       return a.time.compareTo(b.time);
-    });
-    list.forEach((f) {
-      print(f.time);
     });
     return list;
   }

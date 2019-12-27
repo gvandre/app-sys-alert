@@ -29,8 +29,7 @@ dev_dependencies:
     sdk: flutter
   firebase_core: ^0.3.1  # add dependency for Firebase Core
   firebase_database: ^1.0.3
-  charts_flutter: ^0.6.0
-  fl_chart: ^0.2.0
+  fl_chart: ^0.6.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

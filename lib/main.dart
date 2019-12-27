@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // Views
 import './views/LegendChart.dart';
 import './views/ChartLine.dart';
+import './views/ChartSensorValues.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -31,14 +32,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Column(
         children: <Widget>[
           new LegendChart(),
-          new Chartline(),
+          new ChartSensorValues()
         ],
       ),
     );
