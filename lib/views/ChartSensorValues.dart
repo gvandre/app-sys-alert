@@ -6,186 +6,14 @@ class ChartSensorValues extends StatefulWidget {
 
   @override
   _ChartSensorState createState()=> _ChartSensorState();
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Expanded(
-  //     child: Column(
-  //       mainAxisSize: MainAxisSize.max,
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: [
-  //         Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: const <Widget>[
-  //             Text(
-  //               'Average Line',
-  //               style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16),
-  //             ),
-  //             Text(
-  //               ' and ',
-  //               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
-  //             ),
-  //             Text(
-  //               'Indicators',
-  //               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 16),
-  //             ),
-  //           ],
-  //         ),
-  //         Row(
-  //           children: <Widget>[
-  //             Expanded(
-  //               child: Container(
-  //                 padding: EdgeInsets.only(left: 15, right: 15),
-  //                 child: LineChart(
-  //                   LineChartData(
-  //                     lineTouchData: LineTouchData(
-  //                       getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
-  //                         return spotIndexes.map((spotIndex) {
-  //                           final FlSpot spot = barData.spots[spotIndex];
-  //                           if (spot.x == 0 || spot.x == 6) {
-  //                             return null;
-  //                           }
-  //                           return TouchedSpotIndicatorData(
-  //                             const FlLine(color: Colors.blue, strokeWidth: 4),
-  //                             const FlDotData(dotSize: 8, dotColor: Colors.deepOrange),
-  //                           );
-  //                         }).toList();
-  //                       },
-  //                       touchTooltipData: LineTouchTooltipData(
-  //                           tooltipBgColor: Colors.blueAccent,
-  //                           getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
-  //                             return touchedBarSpots.map((barSpot) {
-  //                               final flSpot = barSpot;
-  //                               if (flSpot.x == 0 || flSpot.x == 6) {
-  //                                 return null;
-  //                               }
-
-  //                               return LineTooltipItem(
-  //                                 '${weekDays[flSpot.x.toInt()]} \n${flSpot.y} k colories',
-  //                                 const TextStyle(color: Colors.white),
-  //                               );
-  //                             }).toList();
-  //                           }
-  //                       )
-  //                     ),
-  //                     lineBarsData: [
-  //                       LineChartBarData(
-  //                         spots: const [
-  //                           FlSpot(0, 1.3),
-  //                           FlSpot(1, 1),
-  //                           FlSpot(2, 1.8),
-  //                           FlSpot(3, 1.5),
-  //                           FlSpot(4, 2.2),
-  //                           FlSpot(5, 1.8),
-  //                           FlSpot(6, 3),
-  //                         ],
-  //                         isCurved: true,
-  //                         barWidth: 4,
-  //                         colors: [
-  //                           Colors.orange,
-  //                         ],
-  //                         belowBarData: BarAreaData(
-  //                           show: true,
-  //                           colors: [
-  //                             Colors.orange.withOpacity(0.5),
-  //                             Colors.orange.withOpacity(0.0),
-  //                           ],
-  //                           gradientColorStops: [0.5, 1.0],
-  //                           gradientFrom: const Offset(0, 0),
-  //                           gradientTo: const Offset(0, 1),
-  //                           spotsLine: BarAreaSpotsLine(
-  //                             show: true,
-  //                             flLineStyle: const FlLine(
-  //                               color: Colors.blue,
-  //                               strokeWidth: 2,
-  //                             ),
-  //                             checkToShowSpotLine: (spot) {
-  //                               if (spot.x == 0 || spot.x == 6) {
-  //                                 return false;
-  //                               }
-  //                               return true;
-  //                             }
-  //                           )
-  //                         ),
-  //                         dotData: FlDotData(
-  //                           show: true,
-  //                           dotColor: Colors.deepOrange,
-  //                           dotSize: 6,
-  //                           checkToShowDot: (spot) {
-  //                             return spot.x != 0 && spot.x != 6;
-  //                           }
-  //                         ),
-  //                       ),
-  //                     ],
-  //                     minY: 0,
-  //                     gridData: FlGridData(
-  //                       show: true,
-  //                       drawHorizontalLine: true,
-  //                       drawVerticalLine: true,
-  //                       getDrawingHorizontalLine: (value) {
-  //                         if (value == 0) {
-  //                           return const FlLine(
-  //                             color: Colors.deepOrange,
-  //                             strokeWidth: 2,
-  //                           );
-  //                         } else {
-  //                           return const FlLine(
-  //                             color: Colors.grey,
-  //                             strokeWidth: 0.5,
-  //                           );
-  //                         }
-  //                       },
-  //                       getDrawingVerticalLine: (value) {
-  //                         if (value == 0) {
-  //                           return const FlLine(
-  //                             color: Colors.black,
-  //                             strokeWidth: 2,
-  //                           );
-  //                         } else {
-  //                           return const FlLine(
-  //                             color: Colors.grey,
-  //                             strokeWidth: 0.5,
-  //                           );
-  //                         }
-  //                       },
-  //                     ),
-  //                     titlesData: FlTitlesData(
-  //                       show: true,
-  //                       leftTitles: SideTitles(
-  //                         showTitles: true,
-  //                         textStyle: const TextStyle(color: Colors.white, fontSize: 15),
-  //                       ),
-  //                       bottomTitles: SideTitles(
-  //                         showTitles: true,
-  //                         getTitles: (value) {
-  //                           return weekDays[value.toInt()];
-  //                         },
-  //                         textStyle: const TextStyle(
-  //                           color: Colors.white,
-  //                           fontWeight: FontWeight.bold,
-  //                         ),
-  //                       )
-  //                     ),
-  //                   ),
-  //                 ),
-  //               )
-  //             )
-  //           ],
-  //         )
-  //       ],
-  //     )
-  //   );
-  // }
 }
 
 class _ChartSensorState extends State<ChartSensorValues> {
-  var chartDataHum = [];
-  var chartDataGas = [];
-  var chartDataTemp = [];
+  List<FlSpot> chartDataHum = new List<FlSpot>();
+  List<FlSpot> chartDataGas = new List<FlSpot>();
+  List<FlSpot> chartDataTemp = new List<FlSpot>();
   var xLegendValue = [];
-
   Conection cn = new Conection();
-
 
   List<LineChartBarData> linesBarData1() {
     LineChartBarData lineChartBarData1 = const LineChartBarData(
@@ -266,10 +94,8 @@ class _ChartSensorState extends State<ChartSensorValues> {
     cn.getData().then((onValue){
       double indexXlegend = 0.0;
       onValue.forEach((ev) {
-        xLegendValue.add({
-          "index": indexXlegend,
-          "xLegend": ev.time,
-        });
+        String formatDate = '${ev.time.hour}:${ev.time.minute}:${ev.time.second}';
+        xLegendValue.add(formatDate);
         chartDataHum.add(
           FlSpot(indexXlegend, ev.hum * 1.0)
         );
@@ -288,11 +114,135 @@ class _ChartSensorState extends State<ChartSensorValues> {
 
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Number: ${chartDataGas.length}', style: TextStyle(color: Colors.white),),
+    List<Widget> toShow = [];
+    if (this.xLegendValue.length > 0) {
+      toShow = this.paintChart();
+    } else {
+      toShow = <Widget>[
+        SizedBox(
+          child: CircularProgressIndicator(),
+          width: 60,
+          height: 60,
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 16),
+          child: Text('Awaiting result...'),
+        )
+      ];
+    }
+    return Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: toShow,
+      ),
     );
+  }
+
+  List<Widget> paintChart () {
+    return [
+      Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const <Widget>[
+          Text(
+            'Valores de los sensores integrados',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          ),
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(left: 25, right: 35),
+              child: LineChart(
+                LineChartData(
+                  lineTouchData: LineTouchData(
+                    getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
+                      return spotIndexes.map((spotIndex) {
+                        return TouchedSpotIndicatorData(
+                          const FlLine(color: Colors.blue, strokeWidth: 4),
+                          const FlDotData(dotSize: 8, dotColor: Colors.deepOrange),
+                        );
+                      }).toList();
+                    },
+                    touchTooltipData: LineTouchTooltipData(
+                        tooltipBgColor: Colors.blueAccent,
+                    )
+                  ),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: this.chartDataHum,
+                      isCurved: true,
+                      barWidth: 4,
+                      colors: [
+                        Colors.red,
+                      ],
+                      belowBarData: BarAreaData(
+                        show: false,
+                        colors: [
+                          Colors.orange.withOpacity(0.5),
+                          Colors.orange.withOpacity(0.0),
+                        ],
+                        gradientColorStops: [0.5, 1.0],
+                        gradientFrom: const Offset(0, 0),
+                        gradientTo: const Offset(0, 1),
+                        spotsLine: BarAreaSpotsLine(
+                          show: true,
+                          flLineStyle: const FlLine(
+                            color: Colors.blue,
+                            strokeWidth: 2,
+                          )
+                        )
+                      ),
+                      dotData: FlDotData(
+                        show: true,
+                        dotColor: Colors.deepOrange,
+                        dotSize: 6
+                      ),
+                    ),
+                  ],
+                  minY: 0,
+                  gridData: FlGridData(
+                    show: true,
+                    drawHorizontalLine: true,
+                    drawVerticalLine: true,
+                    horizontalInterval: 5.0,
+                    verticalInterval: 1.0
+                  ),
+                  titlesData: FlTitlesData(
+                    show: true,
+                    leftTitles: SideTitles(
+                      showTitles: true,
+                      textStyle: const TextStyle(color: Colors.white, fontSize: 15),
+                      interval: 5.0,
+                      getTitles: (value) {
+                        int yData = value.toInt();
+                        return '$yData';
+                      }
+                    ),
+                    bottomTitles: SideTitles(
+                      showTitles: true,
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12
+                      ),
+                      getTitles: (value) {
+                        int xIndex = value.toInt();
+                        return '${xLegendValue[xIndex]}';
+                      }
+                    )
+                  ),
+                ),
+              ),
+            )
+          )
+        ],
+      )
+    ];
   }
 }
