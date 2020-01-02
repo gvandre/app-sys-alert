@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 // Views
-import './views/LegendChart.dart';
-import './views/ChartLine.dart';
-import './views/ChartSensorValues.dart';
+import 'views/Login.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -38,8 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: <Widget>[
-          new LegendChart(),
-          new ChartSensorValues()
+          new Login()
         ],
       ),
     );
