@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sys_alert/utils/FirebaseAuth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatelessWidget {
-
   Widget sectionImage() {
     return Container(
       padding: const EdgeInsets.only(top: 25, bottom: 25),
@@ -54,12 +55,12 @@ class Login extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        ProgressDialog pr;
-        pr = new ProgressDialog(context, type: ProgressDialogType.Normal, showLogs: true);
-        pr.style(
-          message: 'Cargando...'
-        );
-        pr.show();
+        AuthProvider auth = new AuthProvider();
+        auth.signWithGoogle().then((onValue) {
+          print('Se ejecuto then');
+        }).catchError((onError) {
+          print(onError);
+        });
       },
     );
   }
