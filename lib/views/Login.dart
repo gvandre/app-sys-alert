@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sys_alert/utils/FirebaseAuth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
   Widget sectionImage() {
     return Container(
       padding: const EdgeInsets.only(top: 25, bottom: 25),
@@ -28,9 +29,64 @@ class Login extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: EdgeInsets.all(10),
-          child: Text('Ingrese con:', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontStyle: FontStyle.italic),),
+          child: Text('O ingrese con:', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontStyle: FontStyle.italic),),
         )
       ],
+    );
+  }
+  Widget sectionLogin(context) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.only(left: 15, right: 15),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 5, bottom: 15),
+                child: TextFormField(
+                  autofocus: false,
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  decoration: InputDecoration(
+                    hintText: 'Ingrese correo',
+                    hintStyle: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w700),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blueGrey)
+                    )
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 5, bottom: 15),
+                child: TextFormField(
+                  autofocus: false,
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  decoration: InputDecoration(
+                    hintText: 'Ingrese contraseña',
+                    hintStyle: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w700),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blueGrey)
+                    )
+                  ),
+                ),
+              ),
+              RaisedButton(
+                color: Colors.blue,
+                child: Text('Ingresar',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20
+                  )
+                ),
+                onPressed: () {
+                },
+              ),
+              sectionInfo(),
+              sectionBtnGmail(context)
+            ],
+          )
+        ),
+      )
     );
   }
   Widget sectionBtnGmail(context) {
@@ -55,12 +111,8 @@ class Login extends StatelessWidget {
         ),
       ),
       onPressed: () {
+        print('click');
         AuthProvider auth = new AuthProvider();
-        auth.signWithGoogle().then((onValue) {
-          print('Se ejecuto then');
-        }).catchError((onError) {
-          print(onError);
-        });
       },
     );
   }
@@ -71,8 +123,7 @@ class Login extends StatelessWidget {
       child: Column(
         children: <Widget>[
           sectionImage(),
-          sectionInfo(),
-          sectionBtnGmail(context)
+          sectionLogin(context)
         ],
       ),
     );
