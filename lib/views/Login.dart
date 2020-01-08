@@ -47,6 +47,7 @@ class Login extends StatelessWidget {
                 child: TextFormField(
                   autofocus: false,
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: 'Ingrese correo',
                     hintStyle: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w700),
@@ -54,6 +55,7 @@ class Login extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.blueGrey)
                     )
                   ),
+                  validator: this.validateEmail,
                 ),
               ),
               Padding(
@@ -68,6 +70,10 @@ class Login extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.blueGrey)
                     )
                   ),
+                  validator: (String value) {
+                    if (value.isEmpty || value.length < 5) return 'Ingrese contraseña válido.';
+                    return null;
+                  },
                 ),
               ),
               RaisedButton(
@@ -127,5 +133,16 @@ class Login extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // Utils
+  String validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Ingrese correo válido.';
+    else
+      return null;
   }
 }
